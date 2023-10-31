@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import PatientList from "./features/patients/Patients";
 import WardList from "./features/ward/Ward";
