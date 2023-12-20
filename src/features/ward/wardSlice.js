@@ -1,19 +1,43 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { v4 as uuid } from "uuid";
 
 const wardsSlice = createSlice({
   name: "wards",
   initialState: {
-    list: [], // Initial state with an empty array of wards
+    wardList: [
+      {
+        wardNumber: 101,
+        capacity: 30,
+        specialization: "General",
+        id: uuid(),
+      },
+      {
+        wardNumber: 201,
+        capacity: 25,
+        specialization: "Surgery",
+        id: uuid(),
+      },
+      {
+        wardNumber: 301,
+        capacity: 15,
+        specialization: "Cardiology",
+        id: uuid(),
+      },
+    ],
   },
   reducers: {
     addWard: (state, action) => {
-      state.list.push(action.payload); // Add a new ward
+      state.wardList.push(action.payload);
     },
     editWard: (state, action) => {
-      // Logic to find and update the ward's information
+      const idx = state.wardList.findIndex(
+        (ele) => ele.id === action.payload.id
+      );
+      state.wardList[idx] = action.payload;
     },
     deleteWard: (state, action) => {
-      // Logic to delete a ward from the list
+      const idx = state.wardList.findIndex((ele) => ele.id === action.payload);
+      state.wardList.splice(idx, 1);
     },
   },
 });
